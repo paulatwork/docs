@@ -6,8 +6,9 @@ The Nitric CLI's `new` command provides prompts to scaffold new projects from te
 
 ```bash
 nitric new
-? What is the name of the stack? hello-world
+? What is the name of your project? hello-world
 ? Choose a template: official/TypeScript - Starter
+? Glob for the function handlers? functions/*.ts
 ```
 
 Navigate to the new project directory and install the NPM dependencies:
@@ -25,17 +26,29 @@ Your project should now look like this:
 |  +-- hello.ts
 +--node_modules/
 |  ...
++--nitric.yaml
 +--package-lock.json
 +--package.json
 +--README.md
 ```
+
+Now add a stack to your project. Each project can have many stacks, each with their own provider configuration.
+
+```
+nitric stack new
+? What do you want to call your new stack? hello-stack
+? Which cloud do you wish to deploy to? aws
+? Select the region ap-south-1
+```
+
+Your project directory should now have an additional file, `nitric-hello-stack.yaml`.
 
 ### Running your app
 
 The Nitric CLI can run your application locally for development and testing. The run command needs to know which source files represent your application code. In this example all of our app code is inside the `functions/` folder, so we provide a glob pattern to match that folder.
 
 ```bash
-nitric run ./functions/*.ts
+nitric run
 ```
 
 Output:
@@ -120,11 +133,7 @@ The first step is to set up your credentials for the cloud provider. You can fol
 You can then deploy by specifying the source files to build and the targeted provider:
 
 ```bash
-nitric deployment apply functions/*.ts --provider aws
-# OR
-nitric deployment apply functions/*.ts --provider gcp
-# OR
-nitric deployment apply functions/*.ts --provider azure
+nitric up
 ```
 
 When the deployment is complete, go to the relevant cloud console and you'll be able to see and interact with your API.
@@ -132,7 +141,7 @@ When the deployment is complete, go to the relevant cloud console and you'll be 
 To undeploy this API -
 
 ```bash
-nitric deployment delete
+nitric down
 ```
 
 ## What's next?
