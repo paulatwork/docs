@@ -75,7 +75,7 @@ The difference comes when writing automated unit or integration tests.
 | Integration | AWS SDK | BYO    |
 | Mocking     | AWS SDK | BYO    |
 
-AWS SAM can't configure all the resources, so when you use the local test environment none of the external resources are going to be mocked. This means for a decent integration testing experience, you have to use the AWS SDK or CLI, which attempts to solve this problem.
+AWS SAM can't configure all the resources, so when you use the local test environment none of the external resources are going to be mocked. **This means for a decent integration testing experience, you have to use the AWS SDK or CLI, which attempts to solve this problem.**
 
 Nitric's testing works with any testing framework, as resource creation and calling can be mocked. When running the local test environment, other resources like buckets are created using the file system. This makes the integration testing super smooth, as the files you create and events you push are actually there.
 
